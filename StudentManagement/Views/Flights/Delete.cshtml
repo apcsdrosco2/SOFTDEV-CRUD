@@ -1,0 +1,28 @@
+@model StudentManagement.ViewModels.FlightDto
+@{
+    ViewData["Title"] = "Delete Flight";
+}
+
+<h1><i class="bi bi-trash"></i> Delete Flight</h1>
+<hr />
+
+<div class="alert alert-warning">
+    <p>Are you sure you want to delete flight <strong>@Model.FlightNumber</strong>?</p>
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Flight #</dt>
+    <dd class="col-sm-9">@Model.FlightNumber</dd>
+    <dt class="col-sm-3">Route</dt>
+    <dd class="col-sm-9">@Model.Origin → @Model.Destination</dd>
+    <dt class="col-sm-3">Departure</dt>
+    <dd class="col-sm-9">@Model.DepartureDate.ToString("g")</dd>
+    <dt class="col-sm-3">Seat Class</dt>
+    <dd class="col-sm-9">@Model.SeatClass</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.FlightId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
