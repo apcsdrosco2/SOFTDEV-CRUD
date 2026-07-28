@@ -21,9 +21,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Repository Pattern: the concrete EF Core repository is registered against its interface.
 // Scoped lifetime matches the DbContext's lifetime (one instance per HTTP request).
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
 
 // Service layer: business logic sits between controllers and repositories.
 builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IFlightService, FlightService>();
 
 // Swagger/OpenAPI - lets students explore and try the REST API from a browser at /swagger.
 builder.Services.AddEndpointsApiExplorer();

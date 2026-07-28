@@ -16,6 +16,7 @@ namespace StudentManagement.Data
         }
 
         public DbSet<Student> Students { get; set; } = null!;
+        public DbSet<Flight> Flights { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -73,6 +74,39 @@ namespace StudentManagement.Data
 
                 entity.HasIndex(s => s.Course)
                       .HasDatabaseName("IX_Students_Course");
+            });
+
+            modelBuilder.Entity<Flight>(entity =>
+            {
+                entity.ToTable("Flights");
+                entity.HasKey(f => f.FlightId);
+
+                entity.Property(f => f.FlightNumber)
+                      .IsRequired()
+                      .HasMaxLength(20);
+
+                entity.Property(f => f.Origin)
+                      .IsRequired()
+                      .HasMaxLength(100);
+
+                entity.Property(f => f.Destination)
+                      .IsRequired()
+                      .HasMaxLength(100);
+
+                entity.Property(f => f.DepartureDate)
+                      .IsRequired();
+
+                entity.Property(f => f.SeatClass)
+                      .IsRequired()
+                      .HasMaxLength(50);
+
+                entity.Property(f => f.DateCreated)
+                      .IsRequired()
+                      .HasDefaultValueSql("GETDATE()");
+
+                entity.Property(f => f.IsActive)
+                      .IsRequired()
+                      .HasDefaultValue(true);
             });
         }
     }
